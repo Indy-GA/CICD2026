@@ -45,3 +45,25 @@ spec:
       targetPort: 3000
       protocol: TCP
   type: ClusterIP
+---
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: hello-app-dev
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+# ajouter dans le /etc/host
+# 192.168.21.100  hello.cluster.local
+    - host: hello.cluster.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-app-dev
+                port:
+                  number: 80
