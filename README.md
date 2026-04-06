@@ -84,7 +84,6 @@ Avant de commencer, tu dois avoir :
    - Dans le terminal positionnz-vous dans /home/etudiant/Documents/project/ (cd /home/etudiant/Documents/project/)
 
 ### 3.4. Fork du dépôt
-
 1. Sur ce repo Git, clique sur **Fork** (en haut à droite).
 <br><br>   
 <img width="805" height="112" alt="image" src="https://github.com/user-attachments/assets/c3322fe9-05ea-4113-880a-80410185589c" />
@@ -139,13 +138,6 @@ git push -u origin qa
 git checkout dev
 
 ```
-### 3.7 Activer les git action
-
-- Cliquer sur Actions sur la barre horizontale
-
-- Cliquer sur le bouton
-<br><br>
-<img width="874" height="341" alt="image" src="https://github.com/user-attachments/assets/81602ccb-dc6a-4195-917f-e087b9dc0772" />
 
 
 
@@ -439,6 +431,9 @@ jobs:
 - Les fichiers `Dockerfile`, `k8s/*.yaml` et `.github/workflows/ci-cd.yaml` existent.
 - Les secrets GitHub sont configurés (`DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `KUBECONFIG_CONTENT`).
 
+---
+- Faire un déploiement initial sur K3S sur les 3 namespace
+
 ### Étape 2 – Modifier le message de l’application
 
 1. Ouvre `app/server.js`.
@@ -461,7 +456,13 @@ git push origin dev
 ```
 
 ### Étape 4 – Observer le pipeline GitHub Actions
+#### 4.1 Activer les git action
+1. Cliquer sur Actions sur la barre horizontale
+2. Cliquer sur le bouton
+<img width="874" height="341" alt="image" src="https://github.com/user-attachments/assets/81602ccb-dc6a-4195-917f-e087b9dc0772" />
+<br>
 
+#### 4.2 Test de l'action
 1. Va sur ton dépôt GitHub.
 2. Clique sur l’onglet **Actions**.
 3. Tu devrais voir un workflow nommé **CI/CD k3s + Docker Hub** en cours d’exécution.
@@ -519,16 +520,6 @@ kubectl port-forward svc/hello-app-qa -n qa 8081:80
 
 Si tu as terminé en avance, tu peux :
 
-- Ajouter une étape **tests** dans le workflow (ex. `npm test`) avant le build Docker.
-- Ajouter une étape de **validation manuelle** avant le déploiement en `prod`.
-- Modifier les manifests pour augmenter le nombre de replicas.
+- Ajouter une étape **tests** dans le CICD qui vérifier le code.
 
 ---
-
-## 12. Checklist de fin de labo
-
-- [ ] Les secrets GitHub sont configurés.
-- [ ] Le workflow GitHub Actions s’exécute sans erreur pour `dev`.
-- [ ] L’application est accessible dans le namespace `dev`.
-- [ ] Le pipeline fonctionne aussi pour `qa` et `prod`.
-- [ ] Tu comprends le rôle de chaque étape du pipeline.
