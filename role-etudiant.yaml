@@ -4,5 +4,5 @@ metadata:
   name: etudiant-role
 rules:
 - apiGroups: ["", "apps"]
-  resources: ["pods", "services", "deployments"]
+  resources: ["pods", "services", "deployments","ingress"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
